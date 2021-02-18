@@ -40,7 +40,7 @@ def printMenu():
     print("2- Videos con más views en un país")
     print("3- Video con más tiempo en trending en un país")
     print("4- Video con más tiempo en trending para una categoria")
-    print("5- Videos con más likes en un país ")
+    print("5- Videos con más likes en un país")
     print("6- Cerrar programa")
 
 catalog = None
@@ -52,10 +52,24 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        print("Cargando información de los archivos ....")
-
+        print("Cargando información del catálogo ....")
+        catalog = initCatalog()
+        
     elif int(inputs[0]) == 2:
-        pass
+        country = input('Ingrese un pais')
+        print("Los videos con más likes en " + country + "son:")
+
+    elif int(inputs[0]) == 3:
+        country = input('Ingrese un pais')
+        print("Los videos con más tiempo en trending en " + country + "son:")
+
+    elif int(inputs[0]) == 4:
+        categoria = input('Ingrese una categoria')
+        print("El video con más tiempo en trending para una la categoria:" + categoria )
+
+    elif int(inputs[0]) == 5:
+        country = input('Ingrese un pais')
+        print("Los videos con más likes en " + country * "son:")
 
     else:
         sys.exit(0)

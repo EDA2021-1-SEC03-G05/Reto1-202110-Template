@@ -30,9 +30,15 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 # Inicialización del Catálogo de libros
+def loadData():
 
 # Funciones para la carga de datos
+def loadData():
 
 # Funciones de ordenamiento
+def loadData():
 
 # Funciones de consulta sobre el catálogo
+def loadData():
+
+def loadData():
