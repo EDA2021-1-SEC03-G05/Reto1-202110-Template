@@ -38,11 +38,11 @@ los mismos.
 # Construccion de modelos
 
 def newCatalog():
-    """"
+    """
     Inicializa el catalogo de videos, crea una lista vacia para guardar:
     - Todos los videos
     - Las Categorias de los videos
-    """"
+    """
     catalog = {'videos': None, 'categorias': None}
 
     catalog['videos'] = lt.newList()
@@ -50,6 +50,13 @@ def newCatalog():
     return catalog
 
 # Funciones para agregar informacion al catalogo
+
+def addVideo(catalog, video):
+    #Se adiciona el video a la lista de videos
+    lt.addLast(catalog['videos'],video)
+    #Se obtiene el nombre del canal 
+    cannel_title = video['cannel_title'].split(",")
+
 
 # Funciones para creacion de datos
 

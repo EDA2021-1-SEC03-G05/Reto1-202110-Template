@@ -46,7 +46,11 @@ def loadData(catalog):
     """"
     loadBooks(catalog)
 
-def loadBooks(catalog):
+def loadVideos(catalog):
     """"
     Carga los videos del archivo. Por cada libro se toman el título, nombre del canal, fecha de trending, país, vistas, likes, dislikes
     """"
+    videosfile = cf.data_dir + 'videos/videos-small.csv'
+    input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
+    for video in input_file:
+        model.addVideo(catalog, video) 
