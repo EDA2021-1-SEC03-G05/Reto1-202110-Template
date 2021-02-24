@@ -43,17 +43,30 @@ def printMenu():
     print("5- Videos con más likes en un país")
     print("6- Cerrar programa")
 
+def initCatalog():
+   #Esta función inicializa el catalogo de videos
+   return controller.initCatalog()
+
+def loadData(catalog): 
+    """
+    Carga los videos en la estructura de datos
+    """
+    controller.loadData(catalog)
+
+
 catalog = None
 
 """
 Menu principal
 """
+
 while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información del catálogo ....")
         catalog = initCatalog()
+        loadData(catalog)
         
     elif int(inputs[0]) == 2:
         country = input('Ingrese un pais')

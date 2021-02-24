@@ -37,6 +37,18 @@ los mismos.
 
 # Construccion de modelos
 
+def newCatalog():
+    """"
+    Inicializa el catalogo de videos, crea una lista vacia para guardar:
+    - Todos los videos
+    - Las Categorias de los videos
+    """"
+    catalog = {'videos': None, 'categorias': None}
+
+    catalog['videos'] = lt.newList()
+
+    return catalog
+
 # Funciones para agregar informacion al catalogo
 
 # Funciones para creacion de datos

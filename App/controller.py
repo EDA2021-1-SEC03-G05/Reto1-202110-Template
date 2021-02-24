@@ -29,16 +29,24 @@ import csv
 El controlador se encarga de mediar entre la vista y el modelo.
 """
 
-# Inicialización del Catálogo de libros
-def loadData():
+# Inicialización del Catálogo de videos
 
-# Funciones para la carga de datos
-def loadData():
+def initCatalog():
+    """
+    Llama a la función de inicializacion del catalogo del modelo
+    """
+    catalog = model.newCatalog()
+    return catalog
 
-# Funciones de ordenamiento
-def loadData():
+#Funciones para la carga de datos
 
-# Funciones de consulta sobre el catálogo
-def loadData():
+def loadData(catalog):
+    """"
+    Carga los datos de los archivos y los carga los datos en la estructura de datos
+    """"
+    loadBooks(catalog)
 
-def loadData():
+def loadBooks(catalog):
+    """"
+    Carga los videos del archivo. Por cada libro se toman el título, nombre del canal, fecha de trending, país, vistas, likes, dislikes
+    """"
