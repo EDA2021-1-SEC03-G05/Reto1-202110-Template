@@ -43,7 +43,7 @@ def newCatalog():
     - Todos los videos
     - Las Categorias de los videos
     """
-    catalog = {'videos': None, 'categorias': None}
+    catalog = {'videos': None}
 
     catalog['videos'] = lt.newList()
 
@@ -51,13 +51,13 @@ def newCatalog():
 
 # Funciones para agregar informacion al catalogo
 
-def addVideo(catalog, video):
-    #Se adiciona el video a la lista de videos
-    lt.addLast(catalog['videos'],video)
-    #Se obtiene el nombre del canal 
-    cannel_title = video['cannel_title'].split(",")
-
-
+def addVideoInfo(catalog, line):
+    #Se adiciona la line del video a la lista de videos
+    lt.addLast(catalog['videos'],line)
+    #Se obtiene el nombre del canal
+    channels = linea['channel_tittle'].split(",")
+    
+    
 # Funciones para creacion de datos
 
 # Funciones de consulta

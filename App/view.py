@@ -44,7 +44,9 @@ def printMenu():
     print("6- Cerrar programa")
 
 def initCatalog():
-   #Esta función inicializa el catalogo de videos
+   """
+   Esta función inicializa el catalogo de videos
+   """
    return controller.initCatalog()
 
 def loadData(catalog): 
@@ -66,7 +68,12 @@ while True:
     if int(inputs[0]) == 1:
         print("Cargando información del catálogo ....")
         catalog = initCatalog()
+        print(catalog)
+        print('Esta es la cantidad de libros cargados antes de cragarlos: '+ str(lt.size(catalog['videos'])))
         loadData(catalog)
+        print('Esta es la cantidad de libros cargados despues de cragarlos: '+ str(lt.size(catalog['videos'])))
+        
+        
         
     elif int(inputs[0]) == 2:
         country = input('Ingrese un pais')

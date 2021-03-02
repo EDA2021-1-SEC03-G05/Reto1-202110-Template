@@ -41,16 +41,17 @@ def initCatalog():
 #Funciones para la carga de datos
 
 def loadData(catalog):
-    """"
+    """
     Carga los datos de los archivos y los carga los datos en la estructura de datos
-    """"
-    loadBooks(catalog)
+    """
+    loadVideos(catalog)
 
 def loadVideos(catalog):
-    """"
+    """
     Carga los videos del archivo. Por cada libro se toman el título, nombre del canal, fecha de trending, país, vistas, likes, dislikes
-    """"
+    """
     videosfile = cf.data_dir + 'videos/videos-small.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
-    for video in input_file:
-        model.addVideo(catalog, video) 
+    for line in input_file:
+        model.addVideoInfo(catalog, line) 
+ 
