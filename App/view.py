@@ -55,6 +55,19 @@ def loadData(catalog):
     """
     controller.loadData(catalog)
 
+def printTopViews(videos_list, country, category, number_of_videos):
+    size = lt.size(videos_list)
+    if size:
+        top = 1
+        print("Los "+str(number_of_videos)+ "videos con más vistas en " + country + " bajo la categoría de "+ category +' son: \n')
+        for video in lt.iterator(videos_list):
+            # recorre la lista del top de videos y extrae: trending_date/title/cannel_title/publish_time/views/likes/dislikes
+            print(str(top)+')   Fecha de trending: '+ video['trending_date']+ '  Título: '+
+                   video['title'] + '   Nombre del canal: '+video['channel_title']+
+                   '    Fecha de publicación: '+video['publish_time']+' Vistas: '+video['views']+
+                   '    Likes: '+video['likes']+ '  Dislikes: ' + video['dislikes'])
+            top += 1 
+
 
 catalog = None
 
@@ -84,23 +97,21 @@ while True:
         print('Dislikes: '+str(first_element['dislikes']))
         print('------------------------------------------------------------')
         #La lista de las categorías cargadas mostrando su id y nombre.
-        position = 1
-        while position <= lt.size(catalog['categories']):
-            element = lt.getElement(catalog['categories'], position)
-            print(str(element['idname']))
+        for category in lt.iterator(catalog['categories']):
+            print(category)
             """
             Preguntar en Cupitaller esta monda
             """
-            position += 1
 
         
     elif int(inputs[0]) == 2:
         country = input('Ingrese un pais: ')
         category = input('Ingrese una categoría: ')
-        number_of_videos = input('Ingrese una cantidad n de videos con más vistas: ')
+        number_of_videos = int(input('Ingrese una c)antidad n de videos con más vistas: '))
         #funcion para buscar el id del name de la categoria ingresada
         #funcion para filtrar las lines que contengan el country y el id específico
-        print("Los videos con más vistas en " + country + " bajo la categoría de "+ category +' son: ')
+        videos_list = controller.getTopViews(catalog, number_of_videos)
+        printTopViews(videos_list, country, category, number_of_videos)
 
     elif int(inputs[0]) == 3:
         country = input('Ingrese un pais')

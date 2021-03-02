@@ -28,8 +28,10 @@ import csv
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 """
-
+#---------------------------------------------------------------------------------------------------------------------------------------
 # Inicialización del Catálogo de videos
+#---------------------------------------------------------------------------------------------------------------------------------------
+
 
 def initCatalog():
     """
@@ -38,7 +40,11 @@ def initCatalog():
     catalog = model.newCatalog()
     return catalog
 
+
+#---------------------------------------------------------------------------------------------------------------------------------------
 #Funciones para la carga de datos
+#---------------------------------------------------------------------------------------------------------------------------------------
+
 
 def loadData(catalog):
     """
@@ -66,3 +72,14 @@ def loadCategories(catalog):
         model.addCategory(catalog, line) 
 
  
+ #---------------------------------------------------------------------------------------------------------------------------------------
+ #Funciones para la busqueda sobre el catalogo
+ #---------------------------------------------------------------------------------------------------------------------------------------
+
+
+def getTopViews(catalog, number_of_videos):
+    """ 
+    Retorna los videos con mas vistas
+    """
+    topViews = model.getTopViews(catalog, number_of_videos)
+    return topViews
