@@ -68,12 +68,31 @@ while True:
     if int(inputs[0]) == 1:
         print("Cargando información del catálogo ....")
         catalog = initCatalog()
-        print(catalog)
-        print('Esta es la cantidad de libros cargados antes de cragarlos: '+ str(lt.size(catalog['videos'])))
         loadData(catalog)
-        print('Esta es la cantidad de libros cargados despues de cragarlos: '+ str(lt.size(catalog['videos'])))
-        
-        
+        #El total de registros de videos cargados del archivo.
+        print('La cantidad de videos cargados es: '+ str(lt.size(catalog['videos'])))
+        print('------------------------------------------------------------')
+        #(title, cannel_title, trending_date, country, views, likes, dislikes).
+        first_element = lt.firstElement(catalog['videos'])
+        print('Los datos del primer video son:')
+        print('Título: '+str(first_element['title']))
+        print('Nombre del canal: '+str(first_element['channel_title']))
+        print('Fecha de trending: '+str(first_element['trending_date']))
+        print('País: '+str(first_element['country']))
+        print('Vistas: '+str(first_element['views']))
+        print('Likes: '+str(first_element['likes']))
+        print('Dislikes: '+str(first_element['dislikes']))
+        print('------------------------------------------------------------')
+        #La lista de las categorías cargadas mostrando su id y nombre.
+        position = 1
+        while position <= lt.size(catalog['categories']):
+            element = lt.getElement(catalog['categories'], position)
+            print(str(element['idname']))
+            """
+            Preguntar en Cupitaller esta monda
+            """
+            position += 1
+
         
     elif int(inputs[0]) == 2:
         country = input('Ingrese un pais')
