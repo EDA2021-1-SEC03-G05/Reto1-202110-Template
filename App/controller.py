@@ -33,11 +33,11 @@ El controlador se encarga de mediar entre la vista y el modelo.
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 
-def initCatalog():
+def initCatalog(type):
     """
     Llama a la función de inicializacion del catalogo del modelo
     """
-    catalog = model.newCatalog()
+    catalog = model.newCatalog(type)
     return catalog
 
 

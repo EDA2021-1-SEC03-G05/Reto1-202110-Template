@@ -43,11 +43,11 @@ def printMenu():
     print("5- Videos con más likes en un país")
     print("6- Cerrar programa")
 
-def initCatalog():
+def initCatalog(type):
    """
    Esta función inicializa el catalogo de videos
    """
-   return controller.initCatalog()
+   return controller.initCatalog(type)
 
 def loadData(catalog): 
     """
@@ -79,13 +79,24 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+ 
+        print('\nSeleccione el tipo de representacion de la lista:\n1)ARRAY_LIST\n2)LINKED_LIST')
+        list_type = int(input(': '))
+        if list_type == 1:
+            catalog = initCatalog('ARRAY_LIST')
+        elif list_type == 2:
+             catalog = initCatalog('LINKED_LIST')
+
         print("Cargando información del catálogo ....")
-        catalog = initCatalog()
         loadData(catalog)
+
         #El total de registros de videos cargados del archivo.
+
         print('La cantidad de videos cargados es: '+ str(lt.size(catalog['videos'])))
         print('------------------------------------------------------------')
+
         #(title, cannel_title, trending_date, country, views, likes, dislikes).
+
         first_element = lt.firstElement(catalog['videos'])
         print('Los datos del primer video son:')
         print('Título: '+str(first_element['title']))
@@ -102,12 +113,14 @@ while True:
             """
             Preguntar en Cupitaller esta monda
             """
+        
+
 
         
     elif int(inputs[0]) == 2:
         country = input('Ingrese un pais: ')
         category = input('Ingrese una categoría: ')
-        number_of_videos = int(input('Ingrese una c)antidad n de videos con más vistas: '))
+        number_of_videos = int(input('Ingrese una cantidad n de videos con más vistas: '))
         #funcion para buscar el id del name de la categoria ingresada
         #funcion para filtrar las lines que contengan el country y el id específico
         videos_list = controller.getTopViews(catalog, number_of_videos)
@@ -127,4 +140,6 @@ while True:
 
     else:
         sys.exit(0)
+
+    #
 sys.exit(0)

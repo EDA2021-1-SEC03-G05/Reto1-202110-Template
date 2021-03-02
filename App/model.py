@@ -39,7 +39,7 @@ los mismos.
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 
-def newCatalog():
+def newCatalog(type):
     """
     Inicializa el catalogo de videos, crea una lista vacia para guardar:
     - Todos los videos
@@ -48,8 +48,8 @@ def newCatalog():
     catalog = {'videos': None,
                'categories': None}
 
-    catalog['videos'] = lt.newList()
-    catalog['categories'] = lt.newList()
+    catalog['videos'] = lt.newList(type)
+    catalog['categories'] = lt.newList(type)
 
     return catalog
 
@@ -92,6 +92,10 @@ def getTopViews(catalog, number_of_videos):
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 
+def cmpVideosByViews(video_1,video_2):
+    return (int(video_1['views'])>int(video_2['views']))
+
+    
 #---------------------------------------------------------------------------------------------------------------------------------------
 # Funciones de ordenamiento
 #---------------------------------------------------------------------------------------------------------------------------------------
