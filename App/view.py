@@ -95,8 +95,12 @@ while True:
 
         
     elif int(inputs[0]) == 2:
-        country = input('Ingrese un pais')
-        print("Los videos con más likes en " + country + "son:")
+        country = input('Ingrese un pais: ')
+        category = input('Ingrese una categoría: ')
+        number_of_videos = input('Ingrese una cantidad n de videos con más vistas: ')
+        #funcion para buscar el id del name de la categoria ingresada
+        #funcion para filtrar las lines que contengan el country y el id específico
+        print("Los videos con más vistas en " + country + " bajo la categoría de "+ category +' son: ')
 
     elif int(inputs[0]) == 3:
         country = input('Ingrese un pais')
