@@ -55,18 +55,52 @@ def loadData(catalog):
     """
     controller.loadData(catalog)
 
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+# Funciones para imprimir datos
+#---------------------------------------------------------------------------------------------------------------------------------------
+
+def printInfoCatalog(catalog):
+    #El total de registros de videos cargados del archivo.
+
+    print('La cantidad de videos cargados es: '+ str(lt.size(catalog['videos'])))
+
+    #(title, cannel_title, trending_date, country, views, likes, dislikes).
+    print('------------------------------------------------------------')
+
+    first_element = lt.firstElement(catalog['videos'])
+    print('Los datos del primer video son:')
+    print('Título: '+str(first_element['title']))
+    print('Nombre del canal: '+str(first_element['channel_title']))
+    print('Fecha de trending: '+str(first_element['trending_date']))
+    print('País: '+str(first_element['country']))
+    print('Vistas: '+str(first_element['views']))
+    print('Likes: '+str(first_element['likes']))
+    print('Dislikes: '+str(first_element['dislikes']))
+    
+
+    #La lista de las categorías cargadas mostrando su id y nombre.
+    print('------------------------------------------------------------')
+
+    for category in lt.iterator(catalog['categories']):
+        print(category['id']+' -> '+category['name'].strip())
+        
+
 def printTopViews(videos_list, country, category, number_of_videos):
-    size = lt.size(videos_list)
+    size = lt.size(videos_list[1])
     if size:
         top = 1
-        print("Los "+str(number_of_videos)+ "videos con más vistas en " + country + " bajo la categoría de "+ category +' son: \n')
-        for video in lt.iterator(videos_list):
+        print("Los "+str(number_of_videos)+ "videos con más vistas en " + country + " bajo la categoría número: "+ category +' son: \n')
+        for video in lt.iterator(videos_list[1]):
             # recorre la lista del top de videos y extrae: trending_date/title/cannel_title/publish_time/views/likes/dislikes
             print(str(top)+')   Fecha de trending: '+ video['trending_date']+ '  Título: '+
                    video['title'] + '   Nombre del canal: '+video['channel_title']+
                    '    Fecha de publicación: '+video['publish_time']+' Vistas: '+video['views']+
                    '    Likes: '+video['likes']+ '  Dislikes: ' + video['dislikes'])
             top += 1 
+        print('Y el tiempo trasncurrido fue de '+str(videos_list[0])+'milisegundos')
+    else:
+        print('Esta lista esta vacia')
 
 
 catalog = None
@@ -81,50 +115,40 @@ while True:
     if int(inputs[0]) == 1:
  
         print('\nSeleccione el tipo de representacion de la lista:\n1)ARRAY_LIST\n2)LINKED_LIST')
+
         list_type = int(input(': '))
-        if list_type == 1:
-            catalog = initCatalog('ARRAY_LIST')
-        elif list_type == 2:
-             catalog = initCatalog('LINKED_LIST')
+        catalog = initCatalog(list_type)
 
         print("Cargando información del catálogo ....")
+
         loadData(catalog)
-
-        #El total de registros de videos cargados del archivo.
-
-        print('La cantidad de videos cargados es: '+ str(lt.size(catalog['videos'])))
-        print('------------------------------------------------------------')
-
-        #(title, cannel_title, trending_date, country, views, likes, dislikes).
-
-        first_element = lt.firstElement(catalog['videos'])
-        print('Los datos del primer video son:')
-        print('Título: '+str(first_element['title']))
-        print('Nombre del canal: '+str(first_element['channel_title']))
-        print('Fecha de trending: '+str(first_element['trending_date']))
-        print('País: '+str(first_element['country']))
-        print('Vistas: '+str(first_element['views']))
-        print('Likes: '+str(first_element['likes']))
-        print('Dislikes: '+str(first_element['dislikes']))
-        print('------------------------------------------------------------')
-        #La lista de las categorías cargadas mostrando su id y nombre.
-        for category in lt.iterator(catalog['categories']):
-            print(category)
-            """
-            Preguntar en Cupitaller esta monda
-            """
-        
-
-
-        
+        printInfoCatalog(catalog)
+   
     elif int(inputs[0]) == 2:
+
         country = input('Ingrese un pais: ')
         category = input('Ingrese una categoría: ')
         number_of_videos = int(input('Ingrese una cantidad n de videos con más vistas: '))
-        #funcion para buscar el id del name de la categoria ingresada
-        #funcion para filtrar las lines que contengan el country y el id específico
-        videos_list = controller.getTopViews(catalog, number_of_videos)
-        printTopViews(videos_list, country, category, number_of_videos)
+
+        size = lt.size(catalog['videos'])
+
+        if number_of_videos > size:
+            print('\nLa cantidad de videos seleccionados supera la cantidad de videos cargados\n')
+        
+        else: 
+            filtered_videos = controller.filterCategoryCountry(catalog, category, country)
+            #Luego de haber filtrado los datos por ciudad y categoria se ordenan los datos según lo que indica el usuario
+            print('Seleccione el tipo de ordenamiento iterativo que desea ejecutar')
+            ordering = int(input('1)Selection\n2)Insertion\n3)Shell\n: '))
+            
+            if ordering == 1:
+                result = controller.sortTopViews(filtered_videos, 'selectionsort')
+            elif ordering == 2:
+                result = controller.sortTopViews(filtered_videos, 'insertionsort')
+            elif ordering == 3:
+                result = controller.sortTopViews(filtered_videos, 'shellsort')
+
+            printTopViews(result, country, category, number_of_videos)
 
     elif int(inputs[0]) == 3:
         country = input('Ingrese un pais')

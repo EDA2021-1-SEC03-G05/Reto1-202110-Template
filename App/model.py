@@ -27,8 +27,11 @@
 
 import config as cf
 from DISClib.ADT import list as lt
-from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as insertionsort
+from DISClib.Algorithms.Sorting import selectionsort as selectionsort
+from DISClib.Algorithms.Sorting import shellsort as shellsort
 assert cf
+import time
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -76,16 +79,15 @@ def addCategory(catalog, line):
 # Funciones de consulta
 #---------------------------------------------------------------------------------------------------------------------------------------
 
-def getTopViews(catalog, number_of_videos):
-    """ 
-    Retorna los videos más vistos
-    """
+
+def filterCategoryCountry(catalog, category, country):
     videos = catalog['videos']
-    topViews = lt.newList()
-    for position in range(1, number_of_videos+1):
-        video = lt.getElement(videos, position)
-        lt.addLast(topViews, video)
-    return topViews
+    filtered_videos = lt.newList()
+    for video in lt.iterator(videos):
+        if video['category_id']== category and video['country']==country:
+            lt.addLast(filtered_videos,video)
+    return filtered_videos
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 # Funciones utilizadas para comparar elementos dentro de una lista
@@ -93,9 +95,23 @@ def getTopViews(catalog, number_of_videos):
 
 
 def cmpVideosByViews(video_1,video_2):
-    return (int(video_1['views'])>int(video_2['views']))
+    return (int(video_1['views'])<int(video_2['views']))
 
-    
+
 #---------------------------------------------------------------------------------------------------------------------------------------
 # Funciones de ordenamiento
 #---------------------------------------------------------------------------------------------------------------------------------------
+
+def sortTopViews(filtered_videos, sort):
+    start_time = time.process_time()
+    if sort == 'insertionsort':
+        sorted_videos = insertionsort.sort(filtered_videos, cmpVideosByViews)
+    elif sort == 'selectionsort':
+        sorted_videos = selectionsort.sort(filtered_videos, cmpVideosByViews)
+    elif sort == 'shellsort':
+        sorted_videos = shellsort.sort(filtered_videos, cmpVideosByViews)
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_videos
+
+

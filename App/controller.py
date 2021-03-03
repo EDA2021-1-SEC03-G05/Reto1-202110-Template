@@ -37,7 +37,11 @@ def initCatalog(type):
     """
     Llama a la función de inicializacion del catalogo del modelo
     """
-    catalog = model.newCatalog(type)
+    if type == 1:
+            catalog = model.newCatalog('ARRAY_LIST')
+    elif type == 2:
+         catalog = model.newCatalog('LINKED_LIST')
+
     return catalog
 
 
@@ -57,7 +61,7 @@ def loadVideos(catalog):
     """
     Carga los videos del archivo. Por cada libro se toman el título, nombre del canal, fecha de trending, país, vistas, likes, dislikes
     """
-    videos_file = cf.data_dir + 'videos/videos-small.csv'
+    videos_file = cf.data_dir + 'videos/videos-large.csv'
     input_file = csv.DictReader(open(videos_file, encoding='utf-8'))
     for line in input_file:
         model.addVideoInfo(catalog, line) 
@@ -67,7 +71,9 @@ def loadCategories(catalog):
     Carga los videos del archivo. Por cada libro se toman el título, nombre del canal, fecha de trending, país, vistas, likes, dislikes
     """
     videos_file = cf.data_dir + 'videos/category-id.csv'
-    input_file = csv.DictReader(open(videos_file, encoding='utf-8'))
+    dialect = csv.excel()
+    dialect.delimiter = '\t'
+    input_file = csv.DictReader(open(videos_file, encoding='utf-8'),dialect=dialect)
     for line in input_file:
         model.addCategory(catalog, line) 
 
@@ -77,9 +83,21 @@ def loadCategories(catalog):
  #---------------------------------------------------------------------------------------------------------------------------------------
 
 
-def getTopViews(catalog, number_of_videos):
-    """ 
-    Retorna los videos con mas vistas
+def filterCategoryCountry(catalog, category, country):
     """
-    topViews = model.getTopViews(catalog, number_of_videos)
-    return topViews
+    Filtra la lista segun categoría y país
+    """
+    filtered_videos = model.filterCategoryCountry(catalog, category, country)
+    return filtered_videos
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+ #Funciones de ordenamiento
+ #---------------------------------------------------------------------------------------------------------------------------------------
+
+
+def sortTopViews(filtered_videos, sort):
+    """
+    Dada una lista filtrada se ordenan los datos segun sus visitas
+    """
+    return model.sortTopViews(filtered_videos, sort)
