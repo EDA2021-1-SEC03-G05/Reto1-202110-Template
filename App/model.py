@@ -82,9 +82,11 @@ def addCategory(catalog, line):
 
 def filterCategoryCountry(catalog, category, country):
     videos = catalog['videos']
+
     filtered_videos = lt.newList()
     for video in lt.iterator(videos):
-        if video['category_id']== category and video['country']==country:
+        if (video['category_id']== category) and (video['country']==country):
+            
             lt.addLast(filtered_videos,video)
     return filtered_videos
 
@@ -95,7 +97,7 @@ def filterCategoryCountry(catalog, category, country):
 
 
 def cmpVideosByViews(video_1,video_2):
-    return (int(video_1['views'])<int(video_2['views']))
+    return (int(video_1['views'])>int(video_2['views']))
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------

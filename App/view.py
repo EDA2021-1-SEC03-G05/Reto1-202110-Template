@@ -88,6 +88,7 @@ def printInfoCatalog(catalog):
 
 def printTopViews(videos_list, country, category, number_of_videos):
     size = lt.size(videos_list[1])
+    print(size)
     if size:
         top = 1
         print("Los "+str(number_of_videos)+ "videos con más vistas en " + country + " bajo la categoría número: "+ category +' son: \n')
