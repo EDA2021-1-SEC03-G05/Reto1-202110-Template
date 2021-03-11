@@ -90,6 +90,17 @@ def filterCategoryCountry(catalog, category, country):
             lt.addLast(filtered_videos,video)
     return filtered_videos
 
+def filterCategory(catalog, category):
+    videos = catalog['videos']
+
+    filtered_videos = lt.newList(cmpfunction= cmpVideosByViews)
+    for video in lt.iterator(videos):
+        if (video['category_id']== category):
+
+            lt.addLast(filtered_videos,video)
+    return filtered_videos
+
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 # Funciones utilizadas para comparar elementos dentro de una lista
@@ -97,7 +108,7 @@ def filterCategoryCountry(catalog, category, country):
 
 
 def cmpVideosByViews(video_1,video_2):
-    return (int(video_1['views'])>int(video_2['views']))
+    return ((int(video_1['views']))>(int(video_2['views'])))
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -106,14 +117,18 @@ def cmpVideosByViews(video_1,video_2):
 
 def sortTopViews(filtered_videos, sort):
     start_time = time.process_time()
-    if sort == 'insertionsort':
+    if sort == 1:
+        print("Insertion sort efectuandose")
         sorted_videos = insertionsort.sort(filtered_videos, cmpVideosByViews)
-    elif sort == 'selectionsort':
+    elif sort == 2:
         sorted_videos = selectionsort.sort(filtered_videos, cmpVideosByViews)
-    elif sort == 'shellsort':
+    elif sort == 3:
         sorted_videos = shellsort.sort(filtered_videos, cmpVideosByViews)
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_videos
 
+def sortVideosCategory(filtered_videos):
+    sorted_videos = shellsort.sort(filtered_videos, cmpVideosByViews)
+    return sorted_videos
 
